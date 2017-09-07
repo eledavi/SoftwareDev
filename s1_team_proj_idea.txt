@@ -12,4 +12,4 @@ Task 2: Pick Project Ideas
 3. An app that helps you find routes from one class to another (basically Google maps-like app for a college campus)
 
 4. Bar Crawl: an app that allows you to input a city and it will find you the area with the highest concentration of bars and find you the shortest path between these bars.
-5. asdfasd
+5. asdfasdasdf
