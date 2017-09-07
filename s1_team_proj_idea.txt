@@ -5,7 +5,7 @@ Elena Davidson
 Ryan Adams
 
 Task 2: Pick Project Ideas
-1. Pete’s Sheets - An app to help clubs keep track of community service hours done by its members, recruit others for community service, and automate filling out community service forms for ASNMSU. 
+1. Pete’s Sheets - An app to help clubs keep track of community service hours done by its members, recruit others for community service, and automate filling out community service forms for ASNMSU.
 
 2. Study Buddy - Find people on campus who are in the same classes as you and are looking for either a dedicated study group or a one night stand study session together. Tells you real time who on campus is studying what (ex: there are currently 2 students on campus also studying calc 2, want to connect?)
 
@@ -13,3 +13,4 @@ Task 2: Pick Project Ideas
 
 4. Bar Crawl: an app that allows you to input a city and it will find you the area with the highest concentration of bars and find you the shortest path between these bars.
 
+5. Test mctesty too
