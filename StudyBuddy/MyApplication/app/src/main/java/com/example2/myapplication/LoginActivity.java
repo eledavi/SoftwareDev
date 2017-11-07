@@ -162,12 +162,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         boolean cancel = false;
         View focusView = null;
 
+
+        if (TextUtils.isEmpty(password)) {
+            mPasswordView.setError("This field is required");
+            focusView = mPasswordView;
+            cancel = true;
+        }
+
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        else if (!isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
         }
+
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
@@ -175,7 +183,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             focusView = mEmailView;
             cancel = true;
         } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
+            mEmailView.setError(getString(R.string.error_invalid_email)+". You must use a school email.");
             focusView = mEmailView;
             cancel = true;
         }
