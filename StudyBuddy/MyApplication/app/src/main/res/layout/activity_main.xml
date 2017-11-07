@@ -26,14 +26,4 @@
         app:layout_anchorGravity="center_vertical|center_horizontal"
         app:srcCompat="@drawable/studybuddy" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|center_horizontal"
-        android:onClick="goToLogin"
-        android:text="Sign in to Study Buddy"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="bottom|center_horizontal" />
-
 </android.support.design.widget.CoordinatorLayout>
