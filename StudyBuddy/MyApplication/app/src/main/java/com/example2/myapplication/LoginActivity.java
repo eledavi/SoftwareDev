@@ -40,6 +40,8 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
+    String url ="localhost:5000/";//this is the location of wherever the server is running.
+
     /**
      * Id to identity READ_CONTACTS permission request.
      */

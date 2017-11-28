@@ -1,183 +1,182 @@
-'''
-
-groups.py
-API endpoint for groups.
-
-GET
-/api/group
-returns an array of all of the groups in database.
-returns error if no groups currently exist
-
-/api/group?group_name="group_name"
-returns: all the information of a group
-returns: error if group doesn't exist.
-
-POST
-/api/groups
-Used to create new groups.
-preconditions: 'groupDescription' of group. NOTE: not uet implemented.
-optional arguments: 'meetDay', 'meetLocation' NOTE: not uet implemented.
-returns: a group object
-returns: error if group already exists.
-NOTE: another way to implement this could be /api/groups?group_name="group_name"
-    kind of like the GET method, matter of preference but might be
-    good just to differenciate between POST and PUT.
-
-PUT
-/api/groups
-Used to update groups.
-preconditions: 'groupDescription' of group. NOTE: not uet implemented.
-optional arguments: 'meetDay', 'meetLocation' NOTE: not uet implemented.
-returns: a group object
-returns: error if group doesn't exists.
-
-'''
-import json
-import cherrypy
-import logging
-import random
-import string
-
-from sessionManager import sessionScope
-from models import Group
-
-
-class Courses:
-    logging.basicConfig(format='%(levelname)s:%(asctime)s %(message)s', level=logging.INFO)
-    exposed = True
-
-    def GET(self, group_name=None):
-        logging.info('GET request to groups.')
-
-        cherrypy.response.headers['Content-Type'] = 'application/json'
-
-        with sessionScope() as session:
-            if group_name is None:
-                data = {
-                    "group_list": []
-                }
-                try:
-                    objs = session.query(Group)
-                except Exception, e:
-                    data = {
-                        "error": e,
-                        "note": "No groups currently exist in database."
-                    }
-                    logging.error('No groups exist.')
-                for i in objs:
-                    data['group_list'].append(i.toDict())
-            else:
-                try:
-                    group = session.query(Group).filter_by(name=group_name).one()
-                    data = group.toDict()
-                except Exception, e:
-                    data = {
-                        "error": e,
-                        "note": "Group not found."
-                    }
-                    logging.error('Group not found.')
-            return json.dumps(data)
-
-    def POST(self):
-        logging.info("POST request to groups.")
-
-        cherrypy.response.headers['Content-Type'] = 'application/json'
-
-        try:
-            data = json.loads(cherrypy.request.body.read())
-        except ValueError:
-            logging.error('Json data could not be read.')
-            return {"error": "Data could not be read."}
-
-        if "groupDescription" not in data:
-            logging.error('group description not found.')
-            return {"error": "You must provide a group description."}
-
-        # TODO: Ensure all other fields exist
-
-        with sessionScope() as session:
-            # We try to find the group to see if it already exists. If it does, we continue
-            # but quit early, if it doesn't, then we 'throw an error', so that we can create
-            # a new group.
-            try:
-                group = session.query(Group).filter_by(group_description=data['groupDescription']).one()
-                logging.error("Group already exists!.")
-                data = {
-                    "error": "Group already exists!",
-                    "group": group.toDict()
-                }
-            except Exception:
-                logging.info("Group doesn't yet exist. Creating new one.")
-                data = CreateGroup(data, session).toDict()
-        return json.dumps(data)
-
-    def PUT(self):
-        logging.info("PUT request to groups.")
-
-        cherrypy.response.headers['Content-Type'] = 'application/json'
-
-        try:
-            data = json.loads(cherrypy.request.body.read())
-        except ValueError:
-            logging.error('Json data could not be read.')
-            return {"error": "Data could not be read."}
-
-        if "groupDescription" not in data:
-            logging.error('group description not found.')
-            return {"error": "You must provide a group description."}
-
-        # NOTE: We actually don't care if all of the fields are here
-        # because maybe we just want to update ex: meeting time?
-
-        with sessionScope() as session:
-            # We try to find the group to see if it already exists. If it does, we continue
-            # but quit early, if it doesn't, then we 'throw an error', so that we can create
-            # a new group.
-            try:
-                group = session.query(Group).filter_by(group_description=data['groupDescription']).one()
-                logging.info("Group found.")
-                updatedGroup = UpdateGroup(group, data, session)
-                data = {
-                    "oldGroup": group,
-                    "updatedGroup": updatedGroup
-                }
-            except Exception, e:
-                logging.error("Group doesn't exist.")
-                data = {
-                    "error": e,
-                    "note": "Group already exists."
-                }
-        return json.dumps(data)
-
-
-def CreateGroup(data, session):
-    group = Group(group_id=GenerateId())
-    # TODO: These should be validated...
-    if "groupDescription" in data:
-        setattr(group, "group_description", data["groupDescription"])
-    if "meetDate" in data:
-        setattr(group, "meet_date", data['meetDate'])
-    # TODO: finish other parameters.
-
-    session.add(group)
-    session.commit()
-    logging.info("Group created.")
-    return group
-
-
-def UpdateGroup(group, data, session):
-    # TODO: These should be validated...
-    if "groupDescription" in data:
-        setattr(group, "group_description", data["groupDescription"])
-    if "meetDate" in data:
-        setattr(group, "meet_date", data['meetDate'])
-    # TODO: finish other parameters.
-
-    session.add(group)
-    session.commit()
-    logging.info("Group updated")
-    return group
-
-
-def GenerateId():
-    return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(17))
+# '''
+#
+# courses.py
+# API endpoint for courses.
+#
+# GET
+# /api/courses
+# returns an array of all of the courses in database.
+# returns error if no courses currently exist
+#
+# /api/courses?course_name="course_name"
+# returns: all the information of a course
+# returns: error if course doesn't exist.
+#
+# POST
+# /api/courses
+# Used to create new courses.
+# preconditions: 'courseDescription' of course. NOTE: not yet implemented.
+# returns: a course object
+# returns: error if course already exists.
+# NOTE: another way to implement this could be /api/courses?course_name="course_name"
+#     kind of like the GET method, matter of preference but might be
+#     good just to differenciate between POST and PUT.
+#
+# PUT
+# /api/courses
+# Used to update courses.
+# preconditions: 'courseDescription' of course. NOTE: not yet implemented.
+# returns: a course object
+# returns: error if course doesn't exists.
+#
+# '''
+# import json
+# import cherrypy
+# import logging
+# import random
+# import string
+#
+# from sessionManager import sessionScope
+# # from models import Course
+#
+#
+# class Courses:
+#     logging.basicConfig(format='%(levelname)s:%(asctime)s %(message)s', level=logging.INFO)
+#     # this just means this is open to the public
+#     exposed = True
+#
+#     def GET(self, course_name=None):
+#         logging.info('GET request to courses.')
+#
+#         cherrypy.response.headers['Content-Type'] = 'application/json'
+#
+#         with sessionScope() as session:
+#             if course_name is None:
+#                 data = {
+#                     "course_list": []
+#                 }
+#                 try:
+#                     objs = session.query(course)
+#                 except Exception, e:
+#                     data = {
+#                         "error": e,
+#                         "note": "No courses currently exist in database."
+#                     }
+#                     logging.error('No courses exist.')
+#                 for i in objs:
+#                     data['course_list'].append(i.toDict())
+#             else:
+#                 try:
+#                     course = session.query(course).filter_by(name=course_name).one()
+#                     data = course.toDict()
+#                 except Exception, e:
+#                     data = {
+#                         "error": e,
+#                         "note": "course not found."
+#                     }
+#                     logging.error('course not found.')
+#             return json.dumps(data)
+#
+#     def POST(self):
+#         logging.info("POST request to courses.")
+#
+#         cherrypy.response.headers['Content-Type'] = 'application/json'
+#
+#         try:
+#             data = json.loads(cherrypy.request.body.read())
+#         except ValueError:
+#             logging.error('Json data could not be read.')
+#             return {"error": "Data could not be read."}
+#
+#         if "courseDescription" not in data:
+#             logging.error('course description not found.')
+#             return {"error": "You must provide a course description."}
+#
+#         # TODO: Ensure all other fields exist
+#
+#         with sessionScope() as session:
+#             # We try to find the course to see if it already exists. If it does, we continue
+#             # but quit early, if it doesn't, then we 'throw an error', so that we can create
+#             # a new course.
+#             try:
+#                 course = session.query(course).filter_by(course_description=data['courseDescription']).one()
+#                 logging.error("course already exists!.")
+#                 data = {
+#                     "error": "course already exists!",
+#                     "course": course.toDict()
+#                 }
+#             except Exception:
+#                 logging.info("course doesn't yet exist. Creating new one.")
+#                 data = Createcourse(data, session).toDict()
+#         return json.dumps(data)
+#
+#     def PUT(self):
+#         logging.info("PUT request to courses.")
+#
+#         cherrypy.response.headers['Content-Type'] = 'application/json'
+#
+#         try:
+#             data = json.loads(cherrypy.request.body.read())
+#         except ValueError:
+#             logging.error('Json data could not be read.')
+#             return {"error": "Data could not be read."}
+#
+#         if "courseDescription" not in data:
+#             logging.error('course description not found.')
+#             return {"error": "You must provide a course description."}
+#
+#         # NOTE: We actually don't care if all of the fields are here
+#         # because maybe we just want to update ex: meeting time?
+#
+#         with sessionScope() as session:
+#             # We try to find the course to see if it already exists. If it does, we continue
+#             # but quit early, if it doesn't, then we 'throw an error', so that we can create
+#             # a new course.
+#             try:
+#                 course = session.query(course).filter_by(course_description=data['courseDescription']).one()
+#                 logging.info("course found.")
+#                 updatedcourse = Updatecourse(course, data, session)
+#                 data = {
+#                     "oldcourse": course,
+#                     "updatedcourse": updatedcourse
+#                 }
+#             except Exception, e:
+#                 logging.error("course doesn't exist.")
+#                 data = {
+#                     "error": e,
+#                     "note": "course already exists."
+#                 }
+#         return json.dumps(data)
+#
+#
+# def Createcourse(data, session):
+#     course = course(course_id=GenerateId())
+#     # TODO: These should be validated...
+#     if "courseDescription" in data:
+#         setattr(course, "course_description", data["courseDescription"])
+#     if "meetDate" in data:
+#         setattr(course, "meet_date", data['meetDate'])
+#     # TODO: finish other parameters.
+#
+#     session.add(course)
+#     session.commit()
+#     logging.info("course created.")
+#     return course
+#
+#
+# def Updatecourse(course, data, session):
+#     # TODO: These should be validated...
+#     if "courseDescription" in data:
+#         setattr(course, "course_description", data["courseDescription"])
+#     if "meetDate" in data:
+#         setattr(course, "meet_date", data['meetDate'])
+#     # TODO: finish other parameters.
+#
+#     session.add(course)
+#     session.commit()
+#     logging.info("course updated")
+#     return course
+#
+#
+# def GenerateId():
+#     return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(17))

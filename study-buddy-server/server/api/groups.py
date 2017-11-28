@@ -4,7 +4,7 @@ groups.py
 API endpoint for groups.
 
 GET
-/api/group
+/api/groups
 returns an array of all of the groups in database.
 returns error if no groups currently exist
 
@@ -39,14 +39,14 @@ import random
 import string
 
 from sessionManager import sessionScope
-from models import Group
+from models import Group, User
 
 
 class Groups:
     logging.basicConfig(format='%(levelname)s:%(asctime)s %(message)s', level=logging.INFO)
     exposed = True
 
-    def GET(self, group_name=None):
+    def GET(self, group_name=None, group_location=None):
         logging.info('GET request to groups.')
 
         cherrypy.response.headers['Content-Type'] = 'application/json'
@@ -56,12 +56,15 @@ class Groups:
                 "group_list": []
             }
             if group_name is None:
+                print 'no name'
                 objs = session.query(Group)
                 for i in objs:
                     data['group_list'].append(i.toDict())
             else:
                 try:
-                    group = session.query(Group).filter_by(name=group_name).one()
+                    print "name: {}".format(group_name)
+                    group = session.query(Group).filter_by(id=group_name).one()
+
                     data['group_list'].append(group.toDict())
                 except Exception, e:
                     data = {
@@ -86,6 +89,10 @@ class Groups:
             logging.error('group description not found.')
             return {"error": "You must provide a group description."}
 
+        if "myLeader" not in data:
+            logging.error('group leader not found.')
+            return {"error": "You must provide a group leader."}
+
         # TODO: Ensure all other fields exist
 
         with sessionScope() as session:
@@ -102,6 +109,11 @@ class Groups:
             except Exception:
                 logging.info("Group doesn't yet exist. Creating new one.")
                 data = CreateGroup(data, session).toDict()
+
+        data['groupLeader'] = data['groupLeader']
+        print "here"
+        print data
+        print "done"
         return json.dumps(data)
 
     def PUT(self):
@@ -144,13 +156,20 @@ class Groups:
 
 
 def CreateGroup(data, session):
-    group = Group(group_id=GenerateId())
+    group = Group(id=GenerateId())
     # TODO: These should be validated...
     if "groupDescription" in data:
         setattr(group, "group_description", data["groupDescription"])
-    if "meetDate" in data:
-        setattr(group, "meet_date", data['meetDate'])
-    # TODO: finish other parameters.
+    if "meet_time" in data:
+        setattr(group, "meet_time", data['meet_time'])
+    if "meetLoc" in data:
+        setattr(group, "meet_location", data['meetLoc'])
+
+    user = session.query(User).filter_by(id=data['myLeader']).one()
+    if "myLeader" in data:
+        setattr(group, "myLeader", user)
+        # group.myMembers = []
+        group.myMembers.append(user)
 
     session.add(group)
     session.commit()
@@ -162,8 +181,8 @@ def UpdateGroup(group, data, session):
     # TODO: These should be validated...
     if "groupDescription" in data:
         setattr(group, "group_description", data["groupDescription"])
-    if "meetDate" in data:
-        setattr(group, "meet_date", data['meetDate'])
+    if "meet_time" in data:
+        setattr(group, "meet_time", data['meet_time'])
     # TODO: finish other parameters.
 
     session.add(group)
