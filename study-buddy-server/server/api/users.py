@@ -1,4 +1,6 @@
 '''
+Cyrille Gindreau
+2017
 
 users.py
 API endpoint for users.
@@ -87,28 +89,7 @@ class Users:
             logging.error('user first name not found.')
             return {"error": "You must provide a user firstName."}
 
-        if "lastName" not in data:
-            logging.error('user last name not found.')
-            return{"error": "You must provide a user lastName."}
-
-        if "email" not in data:
-            logging.error('user email not found.')
-            return{"error": "You must provide a user email."}
-
-        if "password" not in data:
-            logging.error('user password not found.')
-            return{"error": "You must provide a user password."}
-
-        if "university" not in data:
-            logging.error('user university not found.')
-            return{"error": "You must provide a user university."}
-
-        if "major" not in data:
-            logging.error('user major not found.')
-            return{"error": "You must provide a user major."}
-
-
-
+        # TODO: Ensure all other fields exist
 
         with sessionScope() as session:
             # We try to find the user to see if it already exists. If it does, we continue
@@ -166,23 +147,13 @@ class Users:
 
 
 def CreateUser(data, session):
-    user = User(id=GenerateId())
+    user = User(user_id=GenerateId())
     # TODO: These should be validated...
     if "firstName" in data:
         setattr(user, "first_name", data["firstName"])
     if "lastName" in data:
         setattr(user, "last_name", data['lastName'])
-    if "email" in data:
-        setattr(user, "email", data['email'])
-    if "password" in data:
-        setattr(user, "password", data['password'])
-    if "university" in data:
-        setattr(user, "university", data['university'])
-    if "major" in data:
-        setattr(user, "major", data['major'])
-    if "rating" in data:
-        setattr(user, "rating", data['rating'])
-
+    # TODO: finish other parameters.
 
     session.add(user)
     session.commit()

@@ -1,12 +1,14 @@
 '''
+Cyrille Gindreau
+2017
 
 groups.py
 API endpoint for groups.
 
 GET
-/api/groups
+/api/group
 returns an array of all of the groups in database.
-returns error if no groups currently exist
+returns empty array if no groups exist
 
 /api/groups?group_name="group_name"
 returns: all the information of a group
@@ -39,33 +41,33 @@ import random
 import string
 
 from sessionManager import sessionScope
-from models import Group, User
+from models import Group
 
 
 class Groups:
     logging.basicConfig(format='%(levelname)s:%(asctime)s %(message)s', level=logging.INFO)
     exposed = True
 
-    def GET(self, group_name=None, group_location=None):
+    def GET(self, group_name=None):
+
         logging.info('GET request to groups.')
 
-        cherrypy.response.headers['Content-Type'] = 'application/json'
+        # Use this if you want json queries.
+        # cherrypy.response.headers['Content-Type'] = 'application/json'
 
         with sessionScope() as session:
-            data = {
-                "group_list": []
-            }
             if group_name is None:
-                print 'no name'
+                data = {
+                    "group_list": []
+                }
+
                 objs = session.query(Group)
                 for i in objs:
                     data['group_list'].append(i.toDict())
             else:
                 try:
-                    print "name: {}".format(group_name)
-                    group = session.query(Group).filter_by(id=group_name).one()
-
-                    data['group_list'].append(group.toDict())
+                    group = session.query(Group).filter_by(group_description=group_name).one()
+                    data = group.toDict()
                 except Exception, e:
                     data = {
                         "error": e,
@@ -89,10 +91,6 @@ class Groups:
             logging.error('group description not found.')
             return {"error": "You must provide a group description."}
 
-        if "myLeader" not in data:
-            logging.error('group leader not found.')
-            return {"error": "You must provide a group leader."}
-
         # TODO: Ensure all other fields exist
 
         with sessionScope() as session:
@@ -109,11 +107,6 @@ class Groups:
             except Exception:
                 logging.info("Group doesn't yet exist. Creating new one.")
                 data = CreateGroup(data, session).toDict()
-
-        data['groupLeader'] = data['groupLeader']
-        print "here"
-        print data
-        print "done"
         return json.dumps(data)
 
     def PUT(self):
@@ -156,20 +149,13 @@ class Groups:
 
 
 def CreateGroup(data, session):
-    group = Group(id=GenerateId())
+    group = Group(group_id=GenerateId())
     # TODO: These should be validated...
     if "groupDescription" in data:
         setattr(group, "group_description", data["groupDescription"])
-    if "meet_time" in data:
-        setattr(group, "meet_time", data['meet_time'])
-    if "meetLoc" in data:
-        setattr(group, "meet_location", data['meetLoc'])
-
-    user = session.query(User).filter_by(id=data['myLeader']).one()
-    if "myLeader" in data:
-        setattr(group, "myLeader", user)
-        # group.myMembers = []
-        group.myMembers.append(user)
+    if "meetDate" in data:
+        setattr(group, "meet_date", data['meetDate'])
+    # TODO: finish other parameters.
 
     session.add(group)
     session.commit()
@@ -181,8 +167,8 @@ def UpdateGroup(group, data, session):
     # TODO: These should be validated...
     if "groupDescription" in data:
         setattr(group, "group_description", data["groupDescription"])
-    if "meet_time" in data:
-        setattr(group, "meet_time", data['meet_time'])
+    if "meetDate" in data:
+        setattr(group, "meet_date", data['meetDate'])
     # TODO: finish other parameters.
 
     session.add(group)
