@@ -1,0 +1,11 @@
+My contribution to this project has been primarily backend development. As a group,
+we have all had to learn new languages and frameworks, which has definitely been
+a challenge. For example, I had limited knowledge of how to implement a backend using
+python, so I spent some time figuring out how to get our cherrypy working and how
+which database would work best for the purposes of our backend. I collaborated a
+lot with the team to approach our problems from different ways - some methods worked
+and others didn't. Once we finally had a stack we all liked, and were in agreement
+on the architecture, I worked with the team to implement our backend using python,
+cherrypy, and sqlalchemy. As far as documenting our progress and project, I would say
+our team has done a good job of frequent collaboration and communication to achieve our
+tasks.
