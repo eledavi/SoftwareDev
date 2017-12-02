@@ -42,4 +42,6 @@
     <string name="course_name_ex_intro_to_biology">Course Name (ex- Intro to Biology)</string>
     <string name="meeting_date_time"><![CDATA[Meeting Date & Time]]></string>
     <string name="group_name_ex_bio_sudy_group">Group Name (ex: Bio Sudy Group)</string>
+    <string name="title_activity_user_profile">UserProfile</string>
+    <string name="title_activity_notification">Notification</string>
 </resources>
