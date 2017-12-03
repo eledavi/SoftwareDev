@@ -31,7 +31,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.android.volley.VolleyError;
+import com.android.volley.Response;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONObject;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -61,6 +73,10 @@ public class SignUp extends AppCompatActivity implements LoaderCallbacks<Cursor>
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private EditText mPasswordView2;
+    private EditText mLastNameView;
+    private EditText mFirstNameView;
+    private EditText mUniversityView;
+    private EditText mMajorView;
     private View mProgressView;
     private View mLoginFormView;
 
@@ -73,6 +89,10 @@ public class SignUp extends AppCompatActivity implements LoaderCallbacks<Cursor>
         populateAutoComplete();
         mPasswordView2 = (EditText) findViewById(R.id.password2);
         mPasswordView = (EditText) findViewById(R.id.password);
+        mLastNameView = (EditText) findViewById(R.id.lastName);
+        mFirstNameView = (EditText) findViewById(R.id.firstName);
+        mUniversityView = (EditText) findViewById(R.id.university);
+        mMajorView = (EditText) findViewById(R.id.major);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -159,6 +179,10 @@ public class SignUp extends AppCompatActivity implements LoaderCallbacks<Cursor>
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
         String password2 = mPasswordView2.getText().toString();
+        String firstName = mFirstNameView.getText().toString();
+        String lastName = mLastNameView.getText().toString();
+        String university = mUniversityView.getText().toString();
+        String major = mMajorView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -211,6 +235,37 @@ public class SignUp extends AppCompatActivity implements LoaderCallbacks<Cursor>
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
         }
+        pr("Starting request");
+
+        Map<String, String> params = new HashMap<>();
+        params.put("firstName", firstName);
+        params.put("lastName", lastName);
+        params.put("email", email);
+        params.put("password", password);
+        params.put("university", university);
+        params.put("major", major);
+
+        JSONObject obj = new JSONObject(params);
+
+        String url ="http://192.168.0.3:5000/api/users";
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, obj, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                pr("got success");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                pr("got err");
+                pr(error.getMessage());
+            }
+        });
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(request);
+
+
+        pr("done with validation");
     }
 
     private boolean isEmailValid(String email) {
@@ -372,6 +427,10 @@ public class SignUp extends AppCompatActivity implements LoaderCallbacks<Cursor>
     public void goToHome (View view) {
         Intent home= new Intent(this, MainActivity2.class);
         startActivity(home);
+    }
+
+    public void pr(String msg){
+        System.out.println(msg);
     }
 }
 
