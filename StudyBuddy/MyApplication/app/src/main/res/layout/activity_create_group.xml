@@ -9,14 +9,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example2.myapplication.CreateGroup">
 
-    <!-- create group progress -->
-
+    <!-- create group form -->
     <LinearLayout
             android:id="@+id/create_group_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!--text entry box to enter group name-->
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -32,6 +32,7 @@
 
             </android.support.design.widget.TextInputLayout>
 
+        <!--text entry box to enter group meeting day-->
         <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -47,7 +48,7 @@
 
         </android.support.design.widget.TextInputLayout>
 
-
+        <!--text entry box to enter group meeting time-->
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -63,6 +64,7 @@
                 android:inputType="time" />
         </android.support.design.widget.TextInputLayout>
 
+        <!--text entry box to enter group day-->
         <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -76,9 +78,10 @@
                     android:hint="@string/course_name_ex_intro_to_biology"
                     android:inputType="textAutoComplete|textShortMessage"
                     android:selectAllOnFocus="false"/>
-            </android.support.design.widget.TextInputLayout>
+        </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+        <!--text entry box to enter group day-->
+        <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -94,6 +97,7 @@
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
+            <!--create group button-->
             <Button
                 android:id="@+id/email_sign_in_button"
                 style="@style/Widget.AppCompat.Button.Small"
