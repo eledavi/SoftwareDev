@@ -38,6 +38,10 @@
             android:label="@string/title_activity_user_profile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".CreateGroup"
+            android:label="Create Group"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".Notification"
             android:label="@string/title_activity_notification"
             android:theme="@style/AppTheme.NoActionBar"></activity>
