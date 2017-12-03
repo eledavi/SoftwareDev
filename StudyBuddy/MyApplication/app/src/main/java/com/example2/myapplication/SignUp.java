@@ -73,6 +73,10 @@ public class SignUp extends AppCompatActivity implements LoaderCallbacks<Cursor>
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private EditText mPasswordView2;
+    private EditText mLastNameView;
+    private EditText mFirstNameView;
+    private EditText mUniversityView;
+    private EditText mMajorView;
     private View mProgressView;
     private View mLoginFormView;
 
@@ -85,6 +89,10 @@ public class SignUp extends AppCompatActivity implements LoaderCallbacks<Cursor>
         populateAutoComplete();
         mPasswordView2 = (EditText) findViewById(R.id.password2);
         mPasswordView = (EditText) findViewById(R.id.password);
+        mLastNameView = (EditText) findViewById(R.id.lastName);
+        mFirstNameView = (EditText) findViewById(R.id.firstName);
+        mUniversityView = (EditText) findViewById(R.id.university);
+        mMajorView = (EditText) findViewById(R.id.major);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -171,46 +179,50 @@ public class SignUp extends AppCompatActivity implements LoaderCallbacks<Cursor>
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
         String password2 = mPasswordView2.getText().toString();
+        String firstName = mFirstNameView.getText().toString();
+        String lastName = mLastNameView.getText().toString();
+        String university = mUniversityView.getText().toString();
+        String major = mMajorView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
-//        if (TextUtils.isEmpty(password)) {
-//            mPasswordView.setError("This field is required");
-//            focusView = mPasswordView;
-//            cancel = true;
-//        }
-//        if (TextUtils.isEmpty(password2)) {
-//            mPasswordView2.setError("This field is required");
-//            focusView = mPasswordView2;
-//            cancel = true;
-//        }
-//
-//
-//        // Check for a valid password, if the user entered one.
-//        if (!isPasswordValid(password)) {
-//            mPasswordView.setError(getString(R.string.error_invalid_password));
-//            focusView = mPasswordView;
-//            cancel = true;
-//        }
-//
-//        if (!password2.equals(password)) {
-//            mPasswordView.setError("Passwords must match");
-//            mPasswordView2.setError("Passwords must match");
-//            focusView = mPasswordView;
-//            cancel = true;
-//        }
-//
-//        // Check for a valid email address.
-//        if (TextUtils.isEmpty(email)) {
-//            mEmailView.setError(getString(R.string.error_field_required));
-//            focusView = mEmailView;
-//            cancel = true;
-//        } else if (!isEmailValid(email)) {
-//            mEmailView.setError(getString(R.string.error_invalid_email)+ ". You must use a school email address.");
-//            focusView = mEmailView;
-//            cancel = true;
-//        }
+        if (TextUtils.isEmpty(password)) {
+            mPasswordView.setError("This field is required");
+            focusView = mPasswordView;
+            cancel = true;
+        }
+        if (TextUtils.isEmpty(password2)) {
+            mPasswordView2.setError("This field is required");
+            focusView = mPasswordView2;
+            cancel = true;
+        }
+
+
+        // Check for a valid password, if the user entered one.
+        if (!isPasswordValid(password)) {
+            mPasswordView.setError(getString(R.string.error_invalid_password));
+            focusView = mPasswordView;
+            cancel = true;
+        }
+
+        if (!password2.equals(password)) {
+            mPasswordView.setError("Passwords must match");
+            mPasswordView2.setError("Passwords must match");
+            focusView = mPasswordView;
+            cancel = true;
+        }
+
+        // Check for a valid email address.
+        if (TextUtils.isEmpty(email)) {
+            mEmailView.setError(getString(R.string.error_field_required));
+            focusView = mEmailView;
+            cancel = true;
+        } else if (!isEmailValid(email)) {
+            mEmailView.setError(getString(R.string.error_invalid_email)+ ". You must use a school email address.");
+            focusView = mEmailView;
+            cancel = true;
+        }
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
@@ -226,12 +238,12 @@ public class SignUp extends AppCompatActivity implements LoaderCallbacks<Cursor>
         pr("Starting request");
 
         Map<String, String> params = new HashMap<>();
-        params.put("firstName", "hello");
-        params.put("lastName", "hello");
-        params.put("email", "hello");
-        params.put("password", "hello");
-        params.put("university", "hello");
-        params.put("major", "hello");
+        params.put("firstName", firstName);
+        params.put("lastName", lastName);
+        params.put("email", email);
+        params.put("password", password);
+        params.put("university", university);
+        params.put("major", major);
 
         JSONObject obj = new JSONObject(params);
 
