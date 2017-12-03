@@ -23,12 +23,15 @@ public class CreateGroup extends AppCompatActivity {
     private SignUp.UserLoginTask mAuthTask = null;
 
     private TextView mTextMessage;
+
+    // Variables for each of othe
     private EditText mGroupNameView;
     private EditText mGroupDayView;
     private EditText mGroupTimeView;
     private EditText mGroupCourseNameView;
     private EditText mGroupCourseIDView;
-    /**
+
+    /*
      * Attempts to create a new study group.
      * If there are form errors (invalid date, missing fields, etc.), the
      * errors are presented and no actual group creation attempt is made.
@@ -102,12 +105,14 @@ public class CreateGroup extends AppCompatActivity {
     }
 
 
+    // Checks to make sure the study day is valid
     private boolean isDayValid(String day) {
         return day.equals("Monday")||day.equals("Tuesday")||day.equals("Wednesday")||
                 day.equals("Thursday")||day.equals("Friday")||day.equals("Saturday")||
                 day.equals("Sunnday");
     }
 
+    // Checks to make sure the study time is valid
     private boolean isTimeValid(String time) {
         return time.contains(":") && (time.endsWith("am")||time.endsWith("AM")||
                 time.endsWith("pm")||time.endsWith("PM"));
