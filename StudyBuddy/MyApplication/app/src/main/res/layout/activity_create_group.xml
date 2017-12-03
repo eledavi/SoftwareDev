@@ -1,0 +1,113 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example2.myapplication.CreateGroup">
+
+    <!-- create group form -->
+    <LinearLayout
+            android:id="@+id/create_group_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--text entry box to enter group name-->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/GroupName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="@string/group_name_ex_bio_sudy_group"
+                    android:inputType="textShortMessage" />
+
+            </android.support.design.widget.TextInputLayout>
+
+        <!--text entry box to enter group meeting day-->
+        <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/GroupDay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="@string/meeting_day_ex_thursday"
+                    android:inputType="textAutoComplete|textShortMessage" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <!--text entry box to enter group meeting time-->
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/time_ex_04_30pm"
+                android:inputType="time" />
+        </android.support.design.widget.TextInputLayout>
+
+        <!--text entry box to enter group day-->
+        <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/GroupCourseName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="@string/course_name_ex_intro_to_biology"
+                    android:inputType="textAutoComplete|textShortMessage"
+                    android:selectAllOnFocus="false"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <!--text entry box to enter group day-->
+        <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/GroupCourseID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="@string/course_id_ex_biol_111"
+                    android:inputType="textAutoComplete|textShortMessage"
+                    android:selectAllOnFocus="false"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!--create group button-->
+            <Button
+                android:id="@+id/email_sign_in_button"
+                style="@style/Widget.AppCompat.Button.Small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:onClick="toCreateGroup"
+                android:text="@string/create_group2"
+                android:textStyle="bold" />
+
+    </LinearLayout>
+
+</LinearLayout>

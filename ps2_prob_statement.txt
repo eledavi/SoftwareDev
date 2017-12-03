@@ -1,0 +1,22 @@
+Team: Study Buddy {A.K.A Wanna Study Buddy}
+Caitlin Ard
+Angela Kearns
+Ryan Adams
+Elena Davidson
+
+
+Problem Statement (ps2- Prob.Statement)
+
+Historical Context:
+The creation of Facebook was amazing.  The digital platform allowed anyone with a “.edu” email address to signup and create a shared space for people within that community.  There was an implicit trust on the space, after all everyone was a college student doing the college “thing”.  You could look at how many people were in your specific college network, and you could look at how many networks you were connected to, and how many people were on those networks.  Facebook seemed much less anonymous.  However, with the proliferation of social media, the implicit trust that was intrinsic to Facebook's initial success among college students is long gone.  The space is now dominated by privacy controls. The front page is cluttered with, stalkers, scammers, politics, a far cry to what the sight looked like back during its inception.  
+
+Problem Context:
+Facebook, Linkedin, and other networking sites use algorithms aggregate factors and make educated guesses on people that you may know to add to your circle of friends.  However, the idea of social and friendship do not always have to go hand in hand.  Many times people are united under a common cause without needing to be friends.
+
+Enter the context for Study Buddy.  Study Buddy provides a space for University students to organize a meetup to study.  After all, “Professor Q is absolutely killing me with these gravitational acceleration questions, and I have no one to work through this with.” To clarify the problem for our imaginary student is not that there are not resources at the university to help solve this problem.  She could contact the TA, pay for a tutor, and the University has a big building with plenty of space to work the problem. What this student lacks is what Universities have traditionally provided that are now seemingly absent , a community for degree seeking students who are going through similar problems in similar classes. University message boards spontaneous meet ups all used to dominate the college sphere. A similar student fifteen years ago might have said “ It's Thursday and the Physics 214 people always meet in the sub to do work through Professor Q’s problems maybe I can check that out.” Google and search engine contain a great deal of knowledge, however community and context is ultimately how the human machine is programmed.  
+
+To enumerate the goals of study buddy:
+Provide a lookup function - I.E - I am in Class X,  {Meetups Always on Campus}, Anyone else want to study?
+Provide persistent recurring meetups for groups -  I.E Class X, Tuesday meetups
+Provide information to request - i.e find and drop in on a study session that is already in progress.  I.E, Looks like there are 2 clac 2 groups currently meeting on campus, want to request to join?
+Provide a “view board”to browse all meetups currently in progress. 
