@@ -31,7 +31,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.android.volley.VolleyError;
+import com.android.volley.Response;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONObject;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -163,42 +175,42 @@ public class SignUp extends AppCompatActivity implements LoaderCallbacks<Cursor>
         boolean cancel = false;
         View focusView = null;
 
-        if (TextUtils.isEmpty(password)) {
-            mPasswordView.setError("This field is required");
-            focusView = mPasswordView;
-            cancel = true;
-        }
-        if (TextUtils.isEmpty(password2)) {
-            mPasswordView2.setError("This field is required");
-            focusView = mPasswordView2;
-            cancel = true;
-        }
-
-
-        // Check for a valid password, if the user entered one.
-        if (!isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
-        }
-
-        if (!password2.equals(password)) {
-            mPasswordView.setError("Passwords must match");
-            mPasswordView2.setError("Passwords must match");
-            focusView = mPasswordView;
-            cancel = true;
-        }
-
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
-            cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email)+ ". You must use a school email address.");
-            focusView = mEmailView;
-            cancel = true;
-        }
+//        if (TextUtils.isEmpty(password)) {
+//            mPasswordView.setError("This field is required");
+//            focusView = mPasswordView;
+//            cancel = true;
+//        }
+//        if (TextUtils.isEmpty(password2)) {
+//            mPasswordView2.setError("This field is required");
+//            focusView = mPasswordView2;
+//            cancel = true;
+//        }
+//
+//
+//        // Check for a valid password, if the user entered one.
+//        if (!isPasswordValid(password)) {
+//            mPasswordView.setError(getString(R.string.error_invalid_password));
+//            focusView = mPasswordView;
+//            cancel = true;
+//        }
+//
+//        if (!password2.equals(password)) {
+//            mPasswordView.setError("Passwords must match");
+//            mPasswordView2.setError("Passwords must match");
+//            focusView = mPasswordView;
+//            cancel = true;
+//        }
+//
+//        // Check for a valid email address.
+//        if (TextUtils.isEmpty(email)) {
+//            mEmailView.setError(getString(R.string.error_field_required));
+//            focusView = mEmailView;
+//            cancel = true;
+//        } else if (!isEmailValid(email)) {
+//            mEmailView.setError(getString(R.string.error_invalid_email)+ ". You must use a school email address.");
+//            focusView = mEmailView;
+//            cancel = true;
+//        }
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
@@ -211,6 +223,37 @@ public class SignUp extends AppCompatActivity implements LoaderCallbacks<Cursor>
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
         }
+        pr("Starting request");
+
+        Map<String, String> params = new HashMap<>();
+        params.put("firstName", "hello");
+        params.put("lastName", "hello");
+        params.put("email", "hello");
+        params.put("password", "hello");
+        params.put("university", "hello");
+        params.put("major", "hello");
+
+        JSONObject obj = new JSONObject(params);
+
+        String url ="http://192.168.0.3:5000/api/users";
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, obj, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                pr("got success");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                pr("got err");
+                pr(error.getMessage());
+            }
+        });
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(request);
+
+
+        pr("done with validation");
     }
 
     private boolean isEmailValid(String email) {
@@ -372,6 +415,10 @@ public class SignUp extends AppCompatActivity implements LoaderCallbacks<Cursor>
     public void goToHome (View view) {
         Intent home= new Intent(this, MainActivity2.class);
         startActivity(home);
+    }
+
+    public void pr(String msg){
+        System.out.println(msg);
     }
 }
 
