@@ -210,7 +210,6 @@ public class SignUp extends AppCompatActivity implements LoaderCallbacks<Cursor>
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
-
             goToHome(mLoginFormView);
         }
     }
