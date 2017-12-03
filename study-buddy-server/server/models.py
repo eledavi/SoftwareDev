@@ -3,9 +3,16 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
-user_groups = Table('user_groups', Base.metadata,
-     Column('user_id', ForeignKey('user.id'), primary_key=True),
-     Column('group_id', ForeignKey('group.id'), primary_key=True)
+user_groups = Table(
+    'user_groups', Base.metadata,
+    Column('user_id', ForeignKey('user.id'), primary_key=True),
+    Column('group_id', ForeignKey('group.id'), primary_key=True)
+)
+
+user_courses = Table(
+    'user_courses', Base.metadata,
+    Column('user_id', ForeignKey('user.id'), primary_key=True),
+    Column('course_id', ForeignKey('course.id'), primary_key=True)
 )
 
 
@@ -23,9 +30,10 @@ class User(Base):
     email = Column(Text)
     groupsThatILead = relationship('Group', back_populates='myLeader')
 
-    groups = relationship('Group',
-                             secondary=user_groups,
-                             back_populates='myMembers')
+    groups = relationship('Group', secondary=user_groups,  back_populates='myMembers')
+
+    courses = relationship('Course', secondary=user_courses,  back_populates='myUsers')
+
     def toDict(self):
         return {
             "userId": self.id,
@@ -35,8 +43,10 @@ class User(Base):
             "major": self.major,
             "rating": self.rating,
             "groupsThatILead": [p.id for p in self.groupsThatILead],
-            "groups": [p.id for p in self.groups]
+            "groups": [p.id for p in self.groups],
+            "courses": [p.id for p in self.courses]
         }
+
 
 class Group(Base):
 
@@ -49,9 +59,11 @@ class Group(Base):
     user_id = Column(Text, ForeignKey('user.id'))
     myLeader = relationship("User", back_populates="groupsThatILead")
 
-    myMembers = relationship('User',
-                             secondary=user_groups,
-                             back_populates='groups')
+    myMembers = relationship('User', secondary=user_groups, back_populates='groups')
+
+    course_id = Column(Text, ForeignKey('course.id'))
+    myCourse = relationship("Course", back_populates="groups")
+
     def toDict(self):
         return {
             'groupId': self.id,
@@ -63,21 +75,24 @@ class Group(Base):
         }
 
 
-# class Course(Base):
-#
-#     __tablename__ = "course"
-#
-#     id = Column(Text, primary_key=True)
-#     course_description = Column(Text)
-#     year = Column(Integer)
-#     semester = Column(Text)
-#     groups = relationship("Group")
-#
-#     def toDict(self):
-#         return {
-#             "courseId": self.id,
-#             "courseDescription": self.course_description,
-#             "year": self.year,
-#             "semester": self.semester,
-#             "groups": self.groups
-#         }
+class Course(Base):
+
+    __tablename__ = "course"
+
+    id = Column(Text, primary_key=True)
+    course_description = Column(Text)
+    year = Column(Integer)
+    semester = Column(Text)
+    groups = relationship('Group', back_populates='myCourse')
+
+    myUsers = relationship('User', secondary=user_courses, back_populates='courses')
+
+    def toDict(self):
+        return {
+            "courseId": self.id,
+            "courseDescription": self.course_description,
+            "year": self.year,
+            "semester": self.semester,
+            "groups": self.groups,
+            "myUsers": [p.id for p in self.myUsers],
+        }

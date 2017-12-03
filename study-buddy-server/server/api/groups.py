@@ -46,7 +46,7 @@ class Groups:
     logging.basicConfig(format='%(levelname)s:%(asctime)s %(message)s', level=logging.INFO)
     exposed = True
 
-    def GET(self, group_name=None, group_location=None):
+    def GET(self, id=None, group_description=None, meet_time=None, meet_location=None, user_id=None, myLeader=None):
         logging.info('GET request to groups.')
 
         cherrypy.response.headers['Content-Type'] = 'application/json'
@@ -55,23 +55,26 @@ class Groups:
             data = {
                 "group_list": []
             }
-            if group_name is None:
-                print 'no name'
-                objs = session.query(Group)
-                for i in objs:
+            query = session.query(Group)
+            if group_description is not None:
+                query.filter_by(group_description=group_description)
+            if meet_time is not None:
+                query.filter_by(meet_time=meet_time)
+            if meet_location is not None:
+                query.filter_by(meet_location=meet_location)
+            if user_id is not None:
+                query.filter_by(user_id=user_id)
+            if myLeader is not None:
+                query.filter_by(myLeader=myLeader)
+            try:
+                for i in query:
                     data['group_list'].append(i.toDict())
-            else:
-                try:
-                    print "name: {}".format(group_name)
-                    group = session.query(Group).filter_by(id=group_name).one()
-
-                    data['group_list'].append(group.toDict())
-                except Exception, e:
-                    data = {
-                        "error": e,
-                        "note": "Group not found."
-                    }
-                    logging.error('Group not found.')
+            except Exception, e:
+                data = {
+                    "error": e,
+                    "note": "err in query"
+                }
+                logging.error('Group not found.')
             return json.dumps(data)
 
     def POST(self):
@@ -110,10 +113,6 @@ class Groups:
                 logging.info("Group doesn't yet exist. Creating new one.")
                 data = CreateGroup(data, session).toDict()
 
-        data['groupLeader'] = data['groupLeader']
-        print "here"
-        print data
-        print "done"
         return json.dumps(data)
 
     def PUT(self):
@@ -168,7 +167,7 @@ def CreateGroup(data, session):
     user = session.query(User).filter_by(id=data['myLeader']).one()
     if "myLeader" in data:
         setattr(group, "myLeader", user)
-        # group.myMembers = []
+        group.myMembers = []
         group.myMembers.append(user)
 
     session.add(group)
