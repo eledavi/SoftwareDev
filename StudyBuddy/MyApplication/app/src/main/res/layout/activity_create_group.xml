@@ -28,26 +28,42 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/group_name_ex_bio_sudy_group"
-                    android:inputType="textPersonName" />
+                    android:inputType="textShortMessage" />
 
             </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+        <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <EditText
-                    android:id="@+id/GroupDateTime"
+                    android:id="@+id/GroupDay"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:hint="@string/meeting_date_time"
-                    android:inputType="datetime" />
-            </android.support.design.widget.TextInputLayout>
+                    android:hint="@string/meeting_day_ex_thursday"
+                    android:inputType="textAutoComplete|textShortMessage" />
+
+        </android.support.design.widget.TextInputLayout>
 
 
-            <android.support.design.widget.TextInputLayout
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/time_ex_04_30pm"
+                android:inputType="time" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -59,8 +75,7 @@
                     android:ems="10"
                     android:hint="@string/course_name_ex_intro_to_biology"
                     android:inputType="textAutoComplete|textShortMessage"
-                    android:selectAllOnFocus="false"
-                    android:singleLine="false" />
+                    android:selectAllOnFocus="false"/>
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -86,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:onClick="toCreateGroup"
-                android:text="Create Group"
+                android:text="@string/create_group2"
                 android:textStyle="bold" />
 
     </LinearLayout>
