@@ -37,11 +37,16 @@
     <string name="ex_bio_111">ex- BIO 111</string>
     <string name="course_id">Course ID</string>
     <string name="create">Create</string>
-    <string name="create_group1">Create Group</string>
     <string name="course_id_ex_biol_111">Course ID (ex- BIOL 111)</string>
     <string name="course_name_ex_intro_to_biology">Course Name (ex- Intro to Biology)</string>
     <string name="meeting_date_time"><![CDATA[Meeting Date & Time]]></string>
     <string name="group_name_ex_bio_sudy_group">Group Name (ex: Bio Sudy Group)</string>
     <string name="title_activity_user_profile">UserProfile</string>
     <string name="title_activity_notification">Notification</string>
+    <string name="day_of_the_week">Day of the Week</string>
+    <string name="group_meeting_day_ex_thursday">Group Meeting Day (ex- Thursday)</string>
+    <string name="meeting_day_ex_thursday">Meeting Day (ex - Thursday)</string>
+    <string name="create_group1">Create Group</string>
+    <string name="time_ex_04_30pm">Time (ex - 04:30pm)</string>
+    <string name="create_group2">Create Group</string>
 </resources>
