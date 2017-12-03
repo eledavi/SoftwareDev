@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/elenadavidson/.android/build-cache/ad95aa0b2382d9120fe891368bde29db36f9ce7b/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="38789e20ace9ab7dbd00554bd2673ab424478d3b">
+        <dex dex="/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_8cdae5a6c774cd9649688e75a5cfc1fb9a8ec10a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/elenadavidson/.android/build-cache/7841b58d70177538f8738d35e6651af94f6d5efe/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="47635644d0d5c103c1dd8360549eb9ba3225c7d3">
+        <dex dex="/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_4691bfec7004f254f739ac44678f3a51c4dafa1a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/elenadavidson/.android/build-cache/6afca0f77140fd50d10091be864b7e7d4224089f/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
+        <dex dex="/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_0510c3c49d0aa7577e2ef742aa36d4dec8b78fb0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="a3774453b8d0df2794d6a237babf7680038a5422">
+        <dex dex="/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_757e92b5f9279398997af92de789782a1bcfa1de/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/elenadavidson/.android/build-cache/170541ce2372ea54e1593be6deb0d8b6264c5fee/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
+        <dex dex="/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_6329057d4099621235b23f5352977cb60cb38e74/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/elenadavidson/.android/build-cache/5b9399e145db0a5193be81b38db78b859016b55c/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d3603c76786999cddea5cf0527bd79077837a1fd/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/elenadavidson/.android/build-cache/41ee7029e0869198b5ac2a62ee93f63b56969eda/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="150252b33b00274cc868578ade018fda0d43a3eb">
+        <dex dex="/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_ce35730e890ce953b36622562a3b46474dc91067/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/elenadavidson/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/25.3.1/support-annotations-25.3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
+        <dex dex="/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.3.1_62b9c06059cca2cc00ca04ab31dd6434ab5882e0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/elenadavidson/.android/build-cache/57af729ac73aede0ad241dcdc3fca5445815527d/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
+        <dex dex="/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_0289d186bf593cfbb7924396f017309e90d34c88/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_36cdf3bc3ef487d825f2aa02af0d7215e8d9b8c9/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/elenadavidson/.android/build-cache/a11dccc7e61ad1cefeeb011e9dbb3a4d9cc60c69/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b9e185dab0d1c79e1f973ab5efda64d48b23cab6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/elenadavidson/.android/build-cache/a51827be0727bac90427d267266d712f3663ea2a/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="4a26a1154d053ab11aaf4c3967c42a4d66390991">
+        <dex dex="/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_68dd00ff68e64bc621d7f0c648a17ba120c965b8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/elenadavidson/.android/build-cache/84a64c9e99cf1201bf66babfd6cc520fb8e3e5ad/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="95519720620b553f63afc789beba9ad582807f7c">
+        <dex dex="/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_245c54e6f23e27dd7114121f3ede3f6a9d5d90d6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/elenadavidson/.android/build-cache/38523cf64fb3762a9f02b0e47ff29956a182b6fa/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="d4cf6227dd6a2ceff0f7dcf0c324380b7abf2c28">
+        <dex dex="/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_798a256b7f83afd2f5bba2b60c58e38662796bd5/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/elenadavidson/Library/Android/sdk/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.2/constraint-layout-solver-1.0.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/constraint-layout-solver-1.0.2_765bdb99865c092ded7f2e22aa1e9cdd8156c32c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/elenadavidson/.android/build-cache/5bd82f0a1f6437135e15d1ab6def538d74c16f46/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
+        <dex dex="/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_9ba643b64ec26c10182e0bfd3db9596c5faeedf5/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/elenadavidson/.android/build-cache/831225ba3e061bfa10e66a239f1f228f8082e470/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="45f697922e6f072daa12f8a2995dc77ab03c11da">
+        <dex dex="/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b75a7d7628a733891a1866240b702cae1df931fb/classes.dex" />
+    </item>
+
+</items>

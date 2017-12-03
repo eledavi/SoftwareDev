@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_launcher.png",
+        "source": "/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/studybuddy.png",
+        "source": "/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/src/main/res/mipmap-xxhdpi/studybuddy.png"
+    },
+    {
+        "merged": "/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_launcher_round.png",
+        "source": "/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png"
+    }
+]

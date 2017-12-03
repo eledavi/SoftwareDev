@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/res/merged/debug/layout-v21/notification_action.xml",
+        "source": "/Users/elenadavidson/.android/build-cache/41ee7029e0869198b5ac2a62ee93f63b56969eda/output/res/layout-v21/notification_action.xml"
+    },
+    {
+        "merged": "/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/res/merged/debug/layout-v21/notification_template_custom_big.xml",
+        "source": "/Users/elenadavidson/.android/build-cache/41ee7029e0869198b5ac2a62ee93f63b56969eda/output/res/layout-v21/notification_template_custom_big.xml"
+    },
+    {
+        "merged": "/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/res/merged/debug/layout-v21/notification_action_tombstone.xml",
+        "source": "/Users/elenadavidson/.android/build-cache/41ee7029e0869198b5ac2a62ee93f63b56969eda/output/res/layout-v21/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/Users/elenadavidson/Documents/software_dev/StudyBuddy/MyApplication/app/build/intermediates/res/merged/debug/layout-v21/notification_template_icon_group.xml",
+        "source": "/Users/elenadavidson/.android/build-cache/41ee7029e0869198b5ac2a62ee93f63b56969eda/output/res/layout-v21/notification_template_icon_group.xml"
+    }
+]
