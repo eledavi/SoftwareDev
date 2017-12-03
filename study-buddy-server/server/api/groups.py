@@ -46,26 +46,26 @@ class Groups:
     logging.basicConfig(format='%(levelname)s:%(asctime)s %(message)s', level=logging.INFO)
     exposed = True
 
-    def GET(self):
+    def GET(self, id=None, group_description=None, meet_time=None, meet_location=None, user_id=None, myLeader=None):
         logging.info('GET request to groups.')
 
         cherrypy.response.headers['Content-Type'] = 'application/json'
-
-        try:
-            data = json.loads(cherrypy.request.body.read())
-        except ValueError:
-            logging.error('Json data could not be read.')
-            return {"error": "Data could not be read."}
 
         with sessionScope() as session:
             data = {
                 "group_list": []
             }
             query = session.query(Group)
-            queryWhitelist = ['groupId', 'groupDescription', 'meetTime', 'meetLocation', 'groupLeader']
-            for i in data:
-                if i in queryWhitelist:
-                    query.filter_by(i=data[i])
+            if group_description is not None:
+                query.filter_by(group_description=group_description)
+            if meet_time is not None:
+                query.filter_by(meet_time=meet_time)
+            if meet_location is not None:
+                query.filter_by(meet_location=meet_location)
+            if user_id is not None:
+                query.filter_by(user_id=user_id)
+            if myLeader is not None:
+                query.filter_by(myLeader=myLeader)
             try:
                 for i in query:
                     data['group_list'].append(i.toDict())

@@ -88,7 +88,7 @@ def loadfixtures():
     logging.debug("Response was: {}".format(response))
 
     # Get groups
-    groups = requests.get("{}groups".format(baseUrl), params={}).json()
+    groups = requests.get("{}groups".format(baseUrl)).json()
     logging.info(json.dumps(groups, indent=4))
 
     updateUser = {
