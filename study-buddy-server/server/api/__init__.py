@@ -1,6 +1,4 @@
 '''
-Cyrille Gindreau
-2017
 
 __init__.py
 
@@ -13,6 +11,7 @@ from courses import Courses
 
 
 class ResourceApi:
-    course = Courses()
-    group = Groups()
-    user = Users()
+    # course = Courses()
+    groups = Groups()
+    users = Users()
+    courses = Courses()

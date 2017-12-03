@@ -18,31 +18,6 @@ baseUrl = "http://localhost:5000/api/"
 def loadfixtures():
 
     # Create test group
-    testGroup = {
-        'groupDescription': "Math 191",
-        'meetDay': "Mon 6:00PM, Fri 4:00PM",
-        'meetLoc': "Zuhl Library",
-    }
-
-    # Make post
-    logging.info("Sending put for testGroup")
-    # "{}group".format(baseUrl) == "http://localhost:5000/api/group"
-    response = requests.post("{}group".format(baseUrl), json.dumps(testGroup))
-    logging.debug("Response was: {}".format(response))
-
-    # Create test group
-    testGroup = {
-        'groupDescription': "CS 498",
-        'meetDay': "Mon 6:00PM, Fri 4:00PM",
-        'meetLoc': "Zuhl Library",
-    }
-
-    # Make post
-    logging.info("Sending put for testGroup")
-    response = requests.post("{}group".format(baseUrl), json.dumps(testGroup))
-    logging.debug("Response was: {}".format(response))
-
-    # Create test group
     testUser = {
         'email': "someone@something.com",
         'firstName': "John",
@@ -55,21 +30,77 @@ def loadfixtures():
 
     # Make post
     logging.info("Sending put for testUser")
-    response = requests.post("{}user".format(baseUrl), json.dumps(testUser))
+    response = requests.post("{}users".format(baseUrl), json.dumps(testUser))
+    logging.debug("Response was: {}".format(response))
+
+    users = requests.get("{}users".format(baseUrl)).json()
+    logging.info(json.dumps(users, indent=4))
+
+    testCourse1 = {
+        'courseDescription': 'History',
+        'year': 2017,
+        'semester': 'Fall'
+    }
+
+    testCourse2 = {
+        'courseDescription': 'English',
+        'year': 2016,
+        'semester': 'Spring'
+    }
+
+    # Make post
+    logging.info("Sending post for testGroup")
+    response = requests.post("{}courses".format(baseUrl), json.dumps(testCourse1))
+    logging.debug("Response was: {}".format(response))
+
+    # Make post
+    logging.info("Sending post for testGroup")
+    response = requests.post("{}courses".format(baseUrl), json.dumps(testCourse2))
+    logging.debug("Response was: {}".format(response))
+
+    # Do get
+    courses = requests.get("{}courses".format(baseUrl)).json()
+    logging.info(json.dumps(courses, indent=4))
+
+    # Create test group
+    testGroup1 = {
+        'groupDescription': "CS_498",
+        'meet_time': "Mon6:00PM,Fri4:00PM",
+        'meetLoc': "Zuhl_Library",
+        'myLeader': users['user_list'][0]['userId']
+    }
+    # Create test group
+    testGroup2 = {
+        'groupDescription': "Math_191",
+        'meet_time': "Mon6:00PM,Fri4:00PM",
+        'meetLoc': "Zuhl_Library",
+        'myLeader': users['user_list'][0]['userId']
+    }
+
+    # Make post
+    logging.info("Sending post for testGroup")
+    response = requests.post("{}groups".format(baseUrl), json.dumps(testGroup1))
+    logging.debug("Response was: {}".format(response))
+
+    # Make post
+    logging.info("Sending post for testGroup")
+    response = requests.post("{}groups".format(baseUrl), json.dumps(testGroup2))
     logging.debug("Response was: {}".format(response))
 
     # Get groups
-    groups = requests.get("{}group".format(baseUrl)).json()
+    groups = requests.get("{}groups".format(baseUrl), params={}).json()
     logging.info(json.dumps(groups, indent=4))
 
-    # updateUser = {
-    #     'groups': []
-    # }
-    #
-    # for i in groups:
-    #     updateUser['groups'].append(i['groupId'])
-    #
-    # # update user with new groups
-    # response = requests.put("{}user".format(baseUrl), json.dumps(updateUser))
-    #
-    # logging.debug("Response was: {}".format(response))
+    updateUser = {
+        'id': users['user_list'][0]['userId'],
+        'groups': [p['groupId'] for p in groups['group_list']],
+        'courses': [p['courseId'] for p in courses['course_list']]
+    }
+
+    response = requests.put("{}user".format(baseUrl), json.dumps(updateUser))
+
+    logging.debug("Response was: {}".format(response))
+
+    users = requests.get("{}users".format(baseUrl)).json()
+    logging.info('final info')
+    logging.info(json.dumps(users, indent=4))

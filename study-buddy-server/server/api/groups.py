@@ -1,14 +1,12 @@
 '''
-Cyrille Gindreau
-2017
 
 groups.py
 API endpoint for groups.
 
 GET
-/api/group
+/api/groups
 returns an array of all of the groups in database.
-returns empty array if no groups exist
+returns error if no groups currently exist
 
 /api/groups?group_name="group_name"
 returns: all the information of a group
@@ -41,39 +39,42 @@ import random
 import string
 
 from sessionManager import sessionScope
-from models import Group
+from models import Group, User
 
 
 class Groups:
     logging.basicConfig(format='%(levelname)s:%(asctime)s %(message)s', level=logging.INFO)
     exposed = True
 
-    def GET(self, group_name=None):
-
+    def GET(self):
         logging.info('GET request to groups.')
 
-        # Use this if you want json queries.
-        # cherrypy.response.headers['Content-Type'] = 'application/json'
+        cherrypy.response.headers['Content-Type'] = 'application/json'
+
+        try:
+            data = json.loads(cherrypy.request.body.read())
+        except ValueError:
+            logging.error('Json data could not be read.')
+            return {"error": "Data could not be read."}
 
         with sessionScope() as session:
-            if group_name is None:
-                data = {
-                    "group_list": []
-                }
-
-                objs = session.query(Group)
-                for i in objs:
+            data = {
+                "group_list": []
+            }
+            query = session.query(Group)
+            queryWhitelist = ['groupId', 'groupDescription', 'meetTime', 'meetLocation', 'groupLeader']
+            for i in data:
+                if i in queryWhitelist:
+                    query.filter_by(i=data[i])
+            try:
+                for i in query:
                     data['group_list'].append(i.toDict())
-            else:
-                try:
-                    group = session.query(Group).filter_by(group_description=group_name).one()
-                    data = group.toDict()
-                except Exception, e:
-                    data = {
-                        "error": e,
-                        "note": "Group not found."
-                    }
-                    logging.error('Group not found.')
+            except Exception, e:
+                data = {
+                    "error": e,
+                    "note": "err in query"
+                }
+                logging.error('Group not found.')
             return json.dumps(data)
 
     def POST(self):
@@ -91,6 +92,10 @@ class Groups:
             logging.error('group description not found.')
             return {"error": "You must provide a group description."}
 
+        if "myLeader" not in data:
+            logging.error('group leader not found.')
+            return {"error": "You must provide a group leader."}
+
         # TODO: Ensure all other fields exist
 
         with sessionScope() as session:
@@ -107,6 +112,7 @@ class Groups:
             except Exception:
                 logging.info("Group doesn't yet exist. Creating new one.")
                 data = CreateGroup(data, session).toDict()
+
         return json.dumps(data)
 
     def PUT(self):
@@ -149,13 +155,20 @@ class Groups:
 
 
 def CreateGroup(data, session):
-    group = Group(group_id=GenerateId())
+    group = Group(id=GenerateId())
     # TODO: These should be validated...
     if "groupDescription" in data:
         setattr(group, "group_description", data["groupDescription"])
-    if "meetDate" in data:
-        setattr(group, "meet_date", data['meetDate'])
-    # TODO: finish other parameters.
+    if "meet_time" in data:
+        setattr(group, "meet_time", data['meet_time'])
+    if "meetLoc" in data:
+        setattr(group, "meet_location", data['meetLoc'])
+
+    user = session.query(User).filter_by(id=data['myLeader']).one()
+    if "myLeader" in data:
+        setattr(group, "myLeader", user)
+        group.myMembers = []
+        group.myMembers.append(user)
 
     session.add(group)
     session.commit()
@@ -167,8 +180,8 @@ def UpdateGroup(group, data, session):
     # TODO: These should be validated...
     if "groupDescription" in data:
         setattr(group, "group_description", data["groupDescription"])
-    if "meetDate" in data:
-        setattr(group, "meet_date", data['meetDate'])
+    if "meet_time" in data:
+        setattr(group, "meet_time", data['meet_time'])
     # TODO: finish other parameters.
 
     session.add(group)
