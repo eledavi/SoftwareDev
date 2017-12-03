@@ -107,9 +107,6 @@ class Users:
             logging.error('user major not found.')
             return{"error": "You must provide a user major."}
 
-
-
-
         with sessionScope() as session:
             # We try to find the user to see if it already exists. If it does, we continue
             # but quit early, if it doesn't, then we 'throw an error', so that we can create
