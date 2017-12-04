@@ -11,6 +11,20 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 
 // Main activity for profile.
 public class MainActivity2 extends AppCompatActivity {
@@ -58,18 +72,43 @@ public class MainActivity2 extends AppCompatActivity {
         setText("major", R.id.majorText);
         setText("email", R.id.emailText);
 
-        for(int i = 0; i < 5; i ++) {
-            createGroup();
-        }
+        Map<String, String> params = new HashMap<>();
+        JSONObject obj = new JSONObject(params);
+        String url ="http://192.168.0.3:5000/api/groups?userId=" + prefs.getString("userId", "Wrong!");
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, obj, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                pr("got success");
+                pr(response.toString());
+                try {
+                    JSONArray arr = response.getJSONArray("group_list");
+                    for(int i = 0; i < arr.length(); i++) {
+                        JSONObject obj = (JSONObject) arr.get(i);
+                        createGroup(obj.get("groupDescription").toString());
+                    }
+                } catch (JSONException e) {
+                    pr("err");
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                pr("got err");
+                pr(error.getMessage());
+            }
+        });
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(request);
 
     }
 
-    private void createGroup(){
+    private void createGroup(String name){
         pr("set");
         TableLayout groupList = (TableLayout) findViewById(R.id.groupTable);
         TableRow newRow = new TableRow(this);
         TextView newText = new TextView(this);
-        newText.setText("hello");
+        newText.setText(name);
         newText.setTextSize(18);
         newRow.addView(newText);
         groupList.addView(newRow);
