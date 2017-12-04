@@ -11,3 +11,8 @@
 .idea
 local.properties
 *.pyc
+*.db
+
+
+
+
