@@ -28,9 +28,13 @@ Study-Buddy-Server: (Required for localhost)
 The current implementation of Study Buddy is not mounted on a permanent server. Please see “How to Run” section for information on how to run app on localhost.
 
 Python Version 2.7: (below are the libraries required)
+
 SQLAlchemy version 1.0.13
+
 Jinja2 version 2.8
+
 Requests version 2.13.0
+
 Cherrypy 11.2.0
 
 How to Run :
