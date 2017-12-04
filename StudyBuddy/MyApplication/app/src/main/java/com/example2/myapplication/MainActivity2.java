@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 
@@ -56,7 +58,21 @@ public class MainActivity2 extends AppCompatActivity {
         setText("major", R.id.majorText);
         setText("email", R.id.emailText);
 
+        for(int i = 0; i < 5; i ++) {
+            createGroup();
+        }
 
+    }
+
+    private void createGroup(){
+        pr("set");
+        TableLayout groupList = (TableLayout) findViewById(R.id.groupTable);
+        TableRow newRow = new TableRow(this);
+        TextView newText = new TextView(this);
+        newText.setText("hello");
+        newText.setTextSize(18);
+        newRow.addView(newText);
+        groupList.addView(newRow);
     }
 
     private void setText(String name, int id) {
