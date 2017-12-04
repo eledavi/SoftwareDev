@@ -30,8 +30,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -40,7 +52,6 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
-    String url ="localhost:5000/";//this is the location of wherever the server is running.
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -204,8 +215,41 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@") && email.endsWith(".edu");
+        if(!(email.contains("@") && email.endsWith(".edu"))){
+            return false;
+        }
+        System.out.println("Starting request");
+
+        Map<String, String> params = new HashMap<>();
+        params.put("email", email);
+
+        JSONObject obj = new JSONObject(params);
+
+        String url ="http://192.168.0.3:5000/api/users?email=" + email;
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, obj, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                System.out.println("got success");
+                //try{
+                    System.out.println(response.toString());
+                //} catch (JSONException ex){
+
+                //}
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("got err");
+                System.out.println(error.getMessage());
+            }
+        });
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(request);
+
+
+        System.out.println("done with validation");
+        return true;
     }
 
     private boolean isPasswordValid(String password) {
