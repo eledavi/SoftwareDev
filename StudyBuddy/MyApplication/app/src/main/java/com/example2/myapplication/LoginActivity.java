@@ -252,6 +252,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         editor.putString("lastName", obj.get("lastName").toString());
                         editor.putString("university", obj.get("university").toString());
                         editor.putString("email", obj.get("email").toString());
+                        editor.putString("userId", obj.get("userId").toString());
                         editor.apply();
                         loginSuccess(emCopy, pwCopy);
                     } else {
