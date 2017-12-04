@@ -14,8 +14,12 @@ Developers will require the following:
 *Please note* - The current development used the Nexus 4 API 24 and was not tested against other devices with other android operating systems. 
 
 Android Studio: (For main android app development)
+
 Gradle Version 4.1
+
 Android Plugin Version 3.0.1
+
+
 The dependencies within the application are handled within android studio, it is important to allow android studio to install these files.
 Additionally all files within StudyBuddy > myApplication folder are required for the app to run properly.  After downloading Android studio, please open the StudyBuddy.
 
