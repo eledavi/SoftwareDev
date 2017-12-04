@@ -46,30 +46,22 @@ class Users:
     logging.basicConfig(format='%(levelname)s:%(asctime)s %(message)s', level=logging.INFO)
     exposed = True
 
-    def GET(self, user_name=None):
+    def GET(self, email=None):
         logging.info('GET request to users.')
 
         cherrypy.response.headers['Content-Type'] = 'application/json'
 
         with sessionScope() as session:
-            if user_name is None:
-                data = {
-                    "user_list": []
-                }
+            data = {
+                "user_list": []
+            }
 
-                objs = session.query(User)
-                for i in objs:
-                    data['user_list'].append(i.toDict())
+            if email is not None:
+                objs = session.query(User).filter_by(email=email)
             else:
-                try:
-                    user = session.query(User).filter_by(firstName=user_name).one()
-                    data = user.toDict()
-                except Exception, e:
-                    data = {
-                        "error": e,
-                        "note": "user not found."
-                    }
-                    logging.error('user not found.')
+                objs = session.query(User)
+            for i in objs:
+                data['user_list'].append(i.toDict())
             return json.dumps(data)
 
     def POST(self):
