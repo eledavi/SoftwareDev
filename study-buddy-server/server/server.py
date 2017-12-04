@@ -7,7 +7,7 @@ from sqlalchemy import create_engine
 
 import models
 from api import ResourceApi
-from commands import Command
+# from commands import Command
 
 # Handle cross platform system paths.
 PATH = os.path.abspath(os.path.dirname(__file__))
