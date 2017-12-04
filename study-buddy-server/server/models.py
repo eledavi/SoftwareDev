@@ -44,7 +44,9 @@ class User(Base):
             "rating": self.rating,
             "groupsThatILead": [p.id for p in self.groupsThatILead],
             "groups": [p.id for p in self.groups],
-            "courses": [p.id for p in self.courses]
+            "courses": [p.id for p in self.courses],
+            "email": self.email,
+            "password": self.password
         }
 
 
