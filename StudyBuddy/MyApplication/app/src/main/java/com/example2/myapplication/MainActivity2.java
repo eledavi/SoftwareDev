@@ -221,6 +221,62 @@ public class MainActivity2 extends AppCompatActivity {
 
     public void SetupHome() {
         ClearCanvas();
+        TableLayout homeGroupLayout = (TableLayout) findViewById(R.id.homeGroupLayout);
+        homeGroupLayout.setVisibility(View.VISIBLE);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        setText("university", R.id.universityText);
+
+        Map<String, String> params = new HashMap<>();
+        JSONObject obj = new JSONObject(params);
+        String url ="http://192.168.0.3:5000/api/groups";
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, obj, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                pr("got success");
+                pr(response.toString());
+                try {
+                    JSONArray arr = response.getJSONArray("group_list");
+                    for(int i = 0; i < arr.length(); i++) {
+                        pr("here");
+                        JSONObject obj = (JSONObject) arr.get(i);
+                        TextView newText;
+                        switch(i) {
+                            case 0:
+                                newText = (TextView) findViewById(R.id.homegroup1);
+                                newText.setText(obj.get("groupDescription").toString());
+                                break;
+                            case 1:
+                                newText = (TextView) findViewById(R.id.homegroup2);
+                                newText.setText(obj.get("groupDescription").toString());
+                                break;
+                            case 2:
+                                newText = (TextView) findViewById(R.id.homegroup3);
+                                newText.setText(obj.get("groupDescription").toString());
+                                break;
+                            case 3:
+                                newText = (TextView) findViewById(R.id.homegroup4);
+                                newText.setText(obj.get("groupDescription").toString());
+                                break;
+                        }
+
+
+                    }
+                } catch (JSONException e) {
+                    pr("err");
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                pr("got err");
+                pr(error.getMessage());
+            }
+        });
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(request);
     }
 
     public void SetupNotifications() {
@@ -238,6 +294,9 @@ public class MainActivity2 extends AppCompatActivity {
         // clear add group
         TableLayout groupAddLayout = (TableLayout) findViewById(R.id.addGroupLayout);
         groupAddLayout.setVisibility(View.INVISIBLE);
+        //clear groupHome layout
+        TableLayout homeGroupLayout = (TableLayout) findViewById(R.id.homeGroupLayout);
+        homeGroupLayout.setVisibility(View.INVISIBLE);
 
         pr("Done clearing");
     }
