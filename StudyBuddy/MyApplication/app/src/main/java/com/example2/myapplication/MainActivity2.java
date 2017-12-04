@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -174,8 +175,29 @@ public class MainActivity2 extends AppCompatActivity {
                 try {
                     JSONArray arr = response.getJSONArray("group_list");
                     for(int i = 0; i < arr.length(); i++) {
+                        pr("here");
                         JSONObject obj = (JSONObject) arr.get(i);
-                        createGroup(obj.get("groupDescription").toString());
+                        TextView newText;
+                        switch(i) {
+                            case 0:
+                                newText = (TextView) findViewById(R.id.group1);
+                                newText.setText(obj.get("groupDescription").toString());
+                                break;
+                            case 1:
+                                newText = (TextView) findViewById(R.id.group2);
+                                newText.setText(obj.get("groupDescription").toString());
+                                break;
+                            case 2:
+                                newText = (TextView) findViewById(R.id.group3);
+                                newText.setText(obj.get("groupDescription").toString());
+                                break;
+                            case 3:
+                                newText = (TextView) findViewById(R.id.group4);
+                                newText.setText(obj.get("groupDescription").toString());
+                                break;
+                        }
+
+
                     }
                 } catch (JSONException e) {
                     pr("err");
@@ -218,21 +240,6 @@ public class MainActivity2 extends AppCompatActivity {
         groupAddLayout.setVisibility(View.INVISIBLE);
 
         pr("Done clearing");
-
-
-    }
-
-
-
-    private void createGroup(String name){
-        pr("set");
-        TableLayout groupList = (TableLayout) findViewById(R.id.groupTable);
-        TableRow newRow = new TableRow(this);
-        TextView newText = new TextView(this);
-        newText.setText(name);
-        newText.setTextSize(18);
-        newRow.addView(newText);
-        groupList.addView(newRow);
     }
 
     private void setText(String name, int id) {
