@@ -37,6 +37,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -101,9 +102,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 attemptLogin();
-                if (isEmailValid(mEmailView.getText().toString()) && isPasswordValid(mPasswordView.getText().toString()))
-                    goToHome(view);
-            }
+          }
         });
 
         mLoginFormView = findViewById(R.id.login_form);
@@ -163,6 +162,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         if (mAuthTask != null) {
             return;
         }
+        pr("starting loging");
 
         // Reset errors.
         mEmailView.setError(null);
@@ -172,21 +172,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
-        boolean cancel = false;
         View focusView = null;
-
 
         if (TextUtils.isEmpty(password)) {
             mPasswordView.setError("This field is required");
             focusView = mPasswordView;
-            cancel = true;
+            loginFail(mPasswordView);
         }
 
         // Check for a valid password, if the user entered one.
         else if (!isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
-            cancel = true;
+            loginFail(mPasswordView);
         }
 
 
@@ -194,48 +192,68 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
-            cancel = true;
-        } else if (!isEmailValid(email)) {
+            loginFail(mEmailView);
+        } else if(!(email.contains("@") && email.endsWith(".edu"))){
             mEmailView.setError(getString(R.string.error_invalid_email)+". You must use a school email.");
             focusView = mEmailView;
-            cancel = true;
+            loginFail(mEmailView);
         }
-
-        if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            focusView.requestFocus();
-        } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
-        }
+        isEmailValid(focusView, email, password);
+        pr("done attempt");
     }
 
-    private boolean isEmailValid(String email) {
-        if(!(email.contains("@") && email.endsWith(".edu"))){
-            return false;
-        }
+    private void loginSuccess(String email,String password){
+        // Show a progress spinner, and kick off a background task to
+        // perform the user login attempt.
+        showProgress(true);
+        mAuthTask = new UserLoginTask(email, password);
+        mAuthTask.execute((Void) null);
+    }
+
+    private void loginFail(View focusView){
+        // There was an error; don't attempt login and focus the first
+        // form field with an error.
+        focusView.requestFocus();
+    }
+
+    private void isEmailValid(View foc, String email, String password) {
+
         System.out.println("Starting request");
 
         Map<String, String> params = new HashMap<>();
         params.put("email", email);
+        params.put("password", password);
 
         JSONObject obj = new JSONObject(params);
+        final String emCopy = email;
+        final String pwCopy = password;
+        final View vCopy = foc;
 
         String url ="http://192.168.0.3:5000/api/users?email=" + email;
-
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, obj, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 System.out.println("got success");
-                //try{
-                    System.out.println(response.toString());
-                //} catch (JSONException ex){
+                System.out.println(response.toString());
+                try {
+                    JSONObject obj = (JSONObject) response.getJSONArray("user_list").get(0);
+                    pr("pass: " + obj.get("password").toString());
+                    pr("pass2: " + pwCopy);
+                    pr(obj.get("password").toString());
+                    if (obj.get("password").toString().equals(pwCopy)) {
+                        pr("password is good.");
+                        loginSuccess(emCopy, pwCopy);
+                    } else {
+                        pr("password is bad.");
+                        View focusView = mEmailView;
+                       loginFail(focusView);
+                    }
 
-                //}
+                } catch(JSONException e){
+                    pr("error:");
+                    pr(e.getMessage());
+                }
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -249,7 +267,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
         System.out.println("done with validation");
-        return true;
     }
 
     private boolean isPasswordValid(String password) {
@@ -412,6 +429,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     public void goToSignUp (View view) {
         Intent signup = new Intent(this, SignUp.class);
         startActivity(signup);
+    }
+
+    public void pr(String msg) {
+        System.out.println(msg);
     }
 }
 
