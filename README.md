@@ -1,4 +1,5 @@
 ##Study Buddy## Version 1.0
+----------------------------
 
 Developed by:  Caitlin Ard, Elena Davidson, Angela Kearns, and Ryan Adams
 
@@ -34,14 +35,23 @@ How to Run :
 Small user configuration is required at this level of implementation: please follow information listed below.
 
 1. Startup the Study-Buddy-Server:
+
 	a. Navigate within terminal to the server located in study-buddy-server > server >
+
 	b. Make sure you have required dependencies (requirements.txt)
+
 	c. Then type command ‘python server.py’
 2. Download Android Studio
+
 	a. Open StudyBuddy/MyApplication within Android Studio
+
 	b. Update and import files as Android Studio instructs (there is always a lot of this)
+
 3. Additionally users will need to modify their ip address within the app itself:
+
 	a. All references of String url = …. Within Android Studio will need to be replaced with the user’s current IP address at the root instead of the current project IP
+
 4. Press the play button and set up your emulator to run Nexus 4 API 24
+
 5. Study Away!
 
