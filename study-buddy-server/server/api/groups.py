@@ -57,21 +57,27 @@ class Groups:
             }
             if userId is not None:
                 print "doing queries"
-                groupQuery = session.query(Group).filter_by(user_id=userId)
+                userQuery = session.query(User).filter_by(id=userId).one()
+                print userQuery.toDict()
+                groupQuery = session.query(Group).filter(Group.myMembers.any(id=userId)).all()
                 print groupQuery
                 try:
                     print groupQuery.toDict()
                 except Exception, e:
                     print "cant print"
-                try:
-                    for i in groupQuery:
-                        data['group_list'].append(i.toDict())
-                except Exception, e:
-                    data = {
-                        "error": e,
-                        "note": "err in query"
-                    }
-                    logging.error('Group not found.')
+            else:
+                groupQuery = session.query(Group)
+            try:
+                print 'itter'
+                for i in groupQuery:
+                    print i.toDict()
+                    data['group_list'].append(i.toDict())
+            except Exception, e:
+                data = {
+                    "error": e,
+                    "note": "err in query"
+                }
+                logging.error('Group not found.')
             return json.dumps(data)
 
     def POST(self):
@@ -152,6 +158,7 @@ class Groups:
 
 
 def CreateGroup(data, session):
+    print "creating group"
     group = Group(id=GenerateId())
     # TODO: These should be validated...
     if "groupDescription" in data:
@@ -160,9 +167,12 @@ def CreateGroup(data, session):
         setattr(group, "meet_time", data['meet_time'])
     if "meetLoc" in data:
         setattr(group, "meet_location", data['meetLoc'])
-
+    print "doing query"
+    print data['myLeader']
     user = session.query(User).filter_by(id=data['myLeader']).one()
+    print user
     if "myLeader" in data:
+
         setattr(group, "myLeader", user)
         group.myMembers = []
         group.myMembers.append(user)
