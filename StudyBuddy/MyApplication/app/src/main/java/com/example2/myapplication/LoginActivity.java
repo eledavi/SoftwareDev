@@ -4,7 +4,9 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -53,7 +55,7 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
-
+    SharedPreferences prefs;
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -107,6 +109,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
     }
 
     private void populateAutoComplete() {
@@ -225,9 +228,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         params.put("password", password);
 
         JSONObject obj = new JSONObject(params);
+        // copies for request scoping.
         final String emCopy = email;
         final String pwCopy = password;
         final View vCopy = foc;
+        final LoginActivity that = this;
 
         String url ="http://192.168.0.3:5000/api/users?email=" + email;
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, obj, new Response.Listener<JSONObject>() {
@@ -237,11 +242,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 System.out.println(response.toString());
                 try {
                     JSONObject obj = (JSONObject) response.getJSONArray("user_list").get(0);
-                    pr("pass: " + obj.get("password").toString());
-                    pr("pass2: " + pwCopy);
                     pr(obj.get("password").toString());
                     if (obj.get("password").toString().equals(pwCopy)) {
                         pr("password is good.");
+                        SharedPreferences mySPrefs = PreferenceManager.getDefaultSharedPreferences(that);
+                        SharedPreferences.Editor editor = mySPrefs.edit();
+                        editor.putString("major", obj.get("major").toString());
+                        editor.putString("firstName", obj.get("firstName").toString());
+                        editor.putString("lastName", obj.get("lastName").toString());
+                        editor.putString("university", obj.get("university").toString());
+                        editor.putString("email", obj.get("email").toString());
+                        editor.apply();
                         loginSuccess(emCopy, pwCopy);
                     } else {
                         pr("password is bad.");

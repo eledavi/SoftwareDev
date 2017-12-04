@@ -24,6 +24,265 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/myCard"
+                    android:layout_width="372dp"
+                    android:layout_height="match_parent"
+                    app:cardBackgroundColor="?attr/colorButtonNormal"
+                    app:cardElevation="5dp"
+                    app:contentPadding="5dp">
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingLeft="8dp">
+
+                            <TextView
+                                android:id="@+id/textView3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBaseline="@+id/myName"
+                                android:layout_alignBottom="@+id/myName"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:width="100dp"
+                                android:text="Profile"
+                                android:textSize="32sp"
+                                tools:text="Profile" />
+
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingLeft="8dp">
+
+                            <TextView
+                                android:id="@+id/textView3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBaseline="@+id/myName"
+                                android:layout_alignBottom="@+id/myName"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:width="100dp"
+                                android:text="First Name"
+                                android:textSize="18sp"
+                                tools:text="First Name" />
+
+                            <TextView
+                                android:id="@+id/firstNameText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBaseline="@+id/myName"
+                                android:layout_alignBottom="@+id/myName"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:width="100dp"
+                                android:text="Cyrille"
+                                android:textSize="22sp"
+                                tools:text="Cyrille" />
+
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/textView4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBaseline="@+id/myName"
+                                android:layout_alignBottom="@+id/myName"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:width="100dp"
+                                android:paddingLeft="8dp"
+                                android:text="Last Name"
+                                android:textSize="18sp"
+                                tools:text="Last Name" />
+
+                            <TextView
+                                android:id="@+id/lastNameText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBaseline="@+id/myName"
+                                android:layout_alignBottom="@+id/myName"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:width="100dp"
+                                android:paddingLeft="8dp"
+                                android:text="Cyrille"
+                                android:textSize="22sp"
+                                tools:text="Cyrille" />
+
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/textView6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBaseline="@+id/myName"
+                                android:layout_alignBottom="@+id/myName"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:width="100dp"
+                                android:paddingLeft="8dp"
+                                android:text="University"
+                                android:textSize="18sp"
+                                tools:text="University" />
+
+                            <TextView
+                                android:id="@+id/universityText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBaseline="@+id/myName"
+                                android:layout_alignBottom="@+id/myName"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:width="100dp"
+                                android:paddingLeft="8dp"
+                                android:text="Cyrille"
+                                android:textSize="22sp"
+                                tools:text="Cyrille" />
+
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/textView5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBaseline="@+id/myName"
+                                android:layout_alignBottom="@+id/myName"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:width="100dp"
+                                android:paddingLeft="8dp"
+                                android:text="Major"
+                                android:textSize="18sp"
+                                tools:text="Major" />
+
+                            <TextView
+                                android:id="@+id/majorText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBaseline="@+id/myName"
+                                android:layout_alignBottom="@+id/myName"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:width="100dp"
+                                android:paddingLeft="8dp"
+                                android:text="Cyrille"
+                                android:textSize="22sp"
+                                tools:text="Cyrille" />
+
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingLeft="8dp">
+
+                            <TextView
+                                android:id="@+id/textView3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBaseline="@+id/myName"
+                                android:layout_alignBottom="@+id/myName"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:width="100dp"
+                                android:text="Email"
+                                android:textSize="18sp"
+                                tools:text="Email" />
+
+                            <TextView
+                                android:id="@+id/emailText"
+                                android:layout_width="249dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBaseline="@+id/myName"
+                                android:layout_alignBottom="@+id/myName"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:width="100dp"
+                                android:text="Cyrille"
+                                android:textSize="22sp"
+                                tools:text="Cyrille" />
+
+                        </TableRow>
+
+                    </TableLayout>
+
+                </android.support.v7.widget.CardView>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/myCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardBackgroundColor="?attr/colorButtonNormal"
+                    app:cardElevation="5dp"
+                    app:contentPadding="5dp">
+
+                    <TableLayout
+                        android:id="@+id/groupTable"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingLeft="8dp">
+
+                            <TextView
+                                android:id="@+id/textView3"
+                                android:layout_width="121dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBaseline="@+id/myName"
+                                android:layout_alignBottom="@+id/myName"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:width="100dp"
+                                android:text="Groups"
+                                android:textSize="32sp"
+                                tools:text="Groups" />
+
+                        </TableRow>
+
+                    </TableLayout>
+
+                </android.support.v7.widget.CardView>
+            </TableRow>
+
+        </TableLayout>
+
     </FrameLayout>
 
     <android.support.design.widget.BottomNavigationView
